@@ -10,6 +10,10 @@ const EmployeeAPi = {
     const url = '/employees';
     return axiosClient.post(url, data);
   },
+  changePassword(newPassword: string): Promise<any> {
+    const url = '/employees/changepassword';
+    return axiosClient.post(url,{"password": newPassword});
+  },
   update(id : string ,data: Employee): Promise<Employee> {
     const url = '/employees/'+id;
     return axiosClient.put(url, data);

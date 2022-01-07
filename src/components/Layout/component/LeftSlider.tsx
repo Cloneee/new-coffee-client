@@ -2,9 +2,8 @@ import {
   ControlOutlined,
   NotificationOutlined,
   OrderedListOutlined,
-  UserOutlined,
+  UserOutlined
 } from '@ant-design/icons';
-import { isFulfilled } from '@reduxjs/toolkit';
 import { Layout, Menu } from 'antd';
 import { useAppSelector } from 'app/hooks';
 import React from 'react';
@@ -37,7 +36,7 @@ const LeftSlider = (props: Props) => {
       items: [
         { key: 0, content: 'Tạo hoá đơn mới' },
         { key: 1, content: 'Danh sách hoá đơn' },
-        { key: 2, content: 'Danh sách hoá đơn' },
+        // { key: 2, content: 'Danh sách hoá đơn' },
       ],
     },
     // { key: 'products', title: 'Sản phẩm', items: [{ key: 3, content: 'Danh sách sản phẩm' }] },
@@ -52,7 +51,7 @@ const LeftSlider = (props: Props) => {
         items: [
           { key: 0, content: 'Tạo hoá đơn mới' },
           { key: 1, content: 'Danh sách hoá đơn' },
-          { key: 2, content: 'Danh sách hoá đơn' },
+          // { key: 2, content: 'Danh sách hoá đơn' },
         ],
       },
       { key: 'products', title: 'Sản phẩm', items: [{ key: 3, content: 'Danh sách sản phẩm' }] },

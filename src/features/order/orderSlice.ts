@@ -25,7 +25,7 @@ const OrderSlice = createSlice({
       state.loading = true;
     },
     fetchOrderListByCustomer(state,action: PayloadAction<ListParams>) {
-
+      state.loading = true;
     },
     fetchOrderListSuccess(state, action: PayloadAction<ListResponse<OrderResponse>>) {
       state.rawData = action.payload;

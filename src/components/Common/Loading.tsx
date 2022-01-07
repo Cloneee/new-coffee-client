@@ -9,6 +9,8 @@ export const Loading = () => {
         <Spin />
         <Spin size="large" />
       </Space>
+      <br></br>
+      <strong>Đang tải ...</strong>
     </div>
   );
 };

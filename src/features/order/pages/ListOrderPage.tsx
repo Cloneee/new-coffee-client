@@ -1,10 +1,12 @@
-import { Button, Pagination, Table, Tag } from 'antd';
+import {
+  OrderedListOutlined
+} from '@ant-design/icons';
+import { Button, Form, Input, Modal, Pagination, Select, Table, Tag, Tooltip } from 'antd';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Loading } from 'components/Common/Loading';
 import { OrderResponse } from 'models';
 import React, { useEffect, useState } from 'react';
 import { OrderActions } from '../orderSlice';
-
 interface Props {}
 
 export const ListOrderPage = (props: Props) => {
@@ -12,11 +14,13 @@ export const ListOrderPage = (props: Props) => {
   const listOrder = useAppSelector((state) => state.order.rawData.data);
   const totalPage = useAppSelector((state) => state.order.rawData.totalPage);
   const isLoading = useAppSelector((state) => state.order.loading);
-  const [currentPage, setcurrentPage] = useState<number>(1)
+  const [selectedOrder, setselectedOrder] = useState<OrderResponse>();
+  const [currentPage, setcurrentPage] = useState<number>(1);
   useEffect(() => {
     dispatch(OrderActions.fetchOrderList(currentPage));
-  }, [currentPage,dispatch]);
+  }, [currentPage, dispatch]);
 
+  const statusOnclick = () => {};
   const columns: any = [
     {
       title: 'Mã hoá đơn',
@@ -50,8 +54,13 @@ export const ListOrderPage = (props: Props) => {
       title: 'Trạng thái',
       dataIndex: 'status',
       key: 'status',
-      render: (tag: string) => {
-        if (tag === 'Pending') return <Tag color="#2db7f5">{(tag + '').toUpperCase()}</Tag>;
+      render: (tag: string,obj: OrderResponse) => {
+        let tooltip = "Nhấn để thay đổi trạng thái"
+        if (tag === 'Pending') 
+        return <Tooltip placement="topRight" title={tooltip}>
+        <Tag  onClick={()=> handleShowStatusModal(obj)} color="#2db7f5">{(tag + '').toUpperCase()}</Tag>
+      </Tooltip>
+        
         else return <Tag color="#87d068">{(tag + '').toUpperCase()}</Tag>;
       },
     },
@@ -68,15 +77,84 @@ export const ListOrderPage = (props: Props) => {
           <div>
             {' '}
             <Button
-              icon={<i className="fas fa-user-circle"></i>}
+              icon={ <OrderedListOutlined />}
               type="primary"
-              // onClick={() => showModal(obj)}
+              onClick={() => handleShowListOrderModal(obj)}
             >
-              &nbsp;&nbsp;Chi tiết
+              &nbsp;&nbsp;Chi tiết đơn hàng
             </Button>
           </div>
         );
       },
+    },
+  ];
+
+  const [isShowListOrderModal, setisShowListOrderModal] = useState(false);
+  const handleShowListOrderModal = (order: OrderResponse) => {
+    setselectedOrder(order);
+    setisShowListOrderModal(true);
+  };
+  const handleCancleListOrderModal = () => {
+    setisShowListOrderModal(false);
+  };
+
+  const footerOfListOrderlModal = [
+    <Button key="back" onClick={() => handleCancleListOrderModal()}>
+      Thoát
+    </Button>,
+  ];
+
+  //Change status modal
+  const [isShowStatusModal, setisShowStatusModal] = useState(false);
+  const onChangeStatusFormSubmit = (values: any) =>{
+      console.log(values)
+  }
+  const handleShowStatusModal = (order: OrderResponse) => {
+    console.log(order)
+    setselectedOrder(order);
+    setisShowStatusModal(true);
+  };
+  const handleCancleStatusModal = () => {
+    setisShowStatusModal(false);
+  };
+
+  const footerOfStatuslModal = [
+    <Button key="back" onClick={() => handleCancleStatusModal()}>
+      Thoát
+    </Button>,
+    <Button
+    form="changeStatusForm"
+    icon={<i className="fas fa-save"></i>}
+    type="primary"
+    key="submit"
+    htmlType="submit"
+  >
+    &nbsp;Lưu
+  </Button>,
+  ];
+  const listOrderDetailColumns: any = [
+    {
+      title: 'Tên sản phẩm',
+      dataIndex: ['product', 'name'],
+      key: 'name',
+      render: (text: string) => <strong>{text}</strong>,
+      width: '45%',
+    },
+    {
+      title: 'Đơn giá',
+      dataIndex: ['product', 'price'],
+      key: 'price',
+      render: (price: number) =>
+        new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(price),
+
+      width: '45%',
+    },
+    {
+      title: 'Số lượng',
+      dataIndex: 'quantity',
+      key: 'quantity',
+      render: (text: string) => <strong>{text}</strong>,
+      width: '45%',
     },
   ];
   return (
@@ -85,18 +163,74 @@ export const ListOrderPage = (props: Props) => {
         <Loading />
       ) : (
         <div>
-        <Table
-          rowKey="_id"
-          columns={columns}
-          dataSource={listOrder}
-          pagination={false}
-          scroll={{ y: 800 }}
-        />
+          <Table
+            rowKey="_id"
+            columns={columns}
+            dataSource={listOrder}
+            pagination={false}
+            scroll={{ y: 800 }}
+          />
           <div className="text-center">
-                <Pagination showSizeChanger={false} current={currentPage} onChange={(e) => setcurrentPage(e)} total={totalPage * 10} />
-               
-            </div>
+            <Pagination
+              showSizeChanger={false}
+              current={currentPage}
+              onChange={(e) => setcurrentPage(e)}
+              total={totalPage * 10}
+            />
+          </div>
 
+          <Modal
+            width={1000}
+            title="Chi tiết hoá đơn"
+            visible={isShowListOrderModal}
+            footer={footerOfListOrderlModal}
+            closable={false}
+          >
+            <div>
+              <Table
+                rowKey="_id"
+                columns={listOrderDetailColumns}
+                dataSource={selectedOrder?.orderItems}
+                pagination={false}
+                scroll={{ y: 800 }}
+              />
+            </div>
+          </Modal>
+        { isShowStatusModal===true &&
+
+        
+          <Modal
+            title="Trạng thái hoá đơn"
+            visible={isShowStatusModal}
+            footer={footerOfStatuslModal}
+            closable={false}
+          >
+            <div>
+              <Form
+                name="basic"
+                id="changeStatusForm"
+                // onFinish={onFormChangePasswordSubmit}
+                initialValues={selectedOrder}
+                autoComplete="off"
+              >
+                  {/* <Form.Item label="" name="_id" style={{ display: 'none' }}>
+                        <Input type="hidden" />
+                    </Form.Item> */}
+                    <Form.Item label="Mã hoá đơn " name="_id" >
+                        <Input disabled />
+                    </Form.Item>
+                <Form.Item>
+                  <Form.Item label="Trạng thái" name="status" >
+                    <Select disabled={selectedOrder?.status==='Complete' ? true: false}>
+                      <Select.Option value="Pending">Đang chờ</Select.Option>
+                      <Select.Option value="Complete">Hoàn thành</Select.Option>
+                      <Select.Option value="Cancel">Huỷ</Select.Option>
+                    </Select>
+                  </Form.Item>
+                </Form.Item>
+              </Form>
+            </div>
+          </Modal>}
         </div>
       )}
     </div>

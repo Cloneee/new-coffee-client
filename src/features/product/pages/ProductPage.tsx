@@ -1,4 +1,4 @@
-import { Button, Image, Table, Tag } from 'antd';
+import { Image, Table, Tag } from 'antd';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { categoryActions } from 'features/category/categorySlice';
 import { Category, FilterFormat, Product } from 'models';
@@ -19,7 +19,7 @@ export const ProductPage = (props: Props) => {
   useEffect(() => {
     dispatch(productActions.fetchProductList());
     dispatch(categoryActions.fetchCategoryList());
-  }, []);
+  }, [dispatch]);
   const columns: any = [
     {
       title: 'Tên sản phẩm',
@@ -74,24 +74,24 @@ export const ProductPage = (props: Props) => {
       dataIndex: 'dateCreated',
       key: 'dateCreated',
     },
-    {
-      title: 'Chi tiết',
-      key: 'lastOnline',
-      render: (obj: Product) => {
-        return (
-          <div>
-            {' '}
-            <Button
-              icon={<i className="fas fa-user-circle"></i>}
-              type="primary"
-              // onClick={() => showModal(obj)}
-            >
-              &nbsp;&nbsp;Chi tiết
-            </Button>
-          </div>
-        );
-      },
-    },
+    // {
+    //   title: 'Chi tiết',
+    //   key: 'lastOnline',
+    //   render: (obj: Product) => {
+    //     return (
+    //       <div>
+    //         {' '}
+    //         <Button
+    //           icon={<i className="fas fa-user-circle"></i>}
+    //           type="primary"
+    //           // onClick={() => showModal(obj)}
+    //         >
+    //           &nbsp;&nbsp;Chi tiết
+    //         </Button>
+    //       </div>
+    //     );
+    //   },
+    // },
   ];
   return (
     <div>
