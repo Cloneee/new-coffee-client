@@ -5,8 +5,7 @@ import { Customer } from 'models/Customer';
 export interface CustomerState {
   loading: boolean;
   list: Customer[];
-  // filter: ListParams;
-  // pagination: PaginationParams;
+  
 }
 
 const initialState: CustomerState = {
@@ -18,10 +17,10 @@ const CustomerSlice = createSlice({
   initialState: initialState,
   reducers: {
     fetchCustomerList(state) {
-      // state.loading = true;
+     
     },
     fetchCustomerResultListWhenSearch(state, action: PayloadAction<string>) {
-      // state.loading = true;
+      
     },
     fetchCustomerListSuccess(state, action: PayloadAction<Customer[]>) {
       state.list = action.payload;

@@ -13,9 +13,6 @@ function* fetchproductList() {
   }
 }
 
-
-
 export default function* productSaga() {
   yield takeLatest(productActions.fetchProductList, fetchproductList);
-
 }

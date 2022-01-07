@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import CustomerAPi from 'api/customer-api';
 import { Customer } from 'models';
-import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { customerActions } from './customerSlice';
 
 function* fetchCustomerList() {

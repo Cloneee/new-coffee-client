@@ -7,4 +7,5 @@ export * from './order-item';
 export * from './order-response';
 export * from './order';
 export * from './product';
+export * from './product-response';
 export * from './user';

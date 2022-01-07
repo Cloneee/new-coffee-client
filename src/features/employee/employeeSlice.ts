@@ -5,8 +5,6 @@ import { Employee } from 'models';
 export interface EmployeeState {
   loading: boolean;
   list: Employee[];
-  // filter: ListParams;
-  // pagination: PaginationParams;
 }
 
 const initialState: EmployeeState = {
@@ -36,8 +34,6 @@ export const employeeActions = EmployeeSlice.actions;
 // Selectors
 export const selectEmployeeList = (state: RootState) => state.employee.list;
 export const selectEmployeeLoading = (state: RootState) => state.employee.loading;
-// export const selectEmployeeFilter = (state: RootState) => state.Employee.filter;
-// export const selectEmployeePagination = (state: RootState) => state.Employee.pagination;
 
 // Reducer
 const employeeReducer = EmployeeSlice.reducer;

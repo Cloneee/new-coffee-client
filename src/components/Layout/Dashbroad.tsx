@@ -1,6 +1,5 @@
 import { Layout } from 'antd'
 import React, { useState } from 'react'
-import { ToastContainer } from 'react-toastify'
 import { Header } from './component/Header'
 import LeftSlider from './component/LeftSlider'
 import MainLayout from './component/MainLayout'

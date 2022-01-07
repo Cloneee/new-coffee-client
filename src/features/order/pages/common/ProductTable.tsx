@@ -22,7 +22,7 @@ export const ProductTable = (props: Props) => {
   useEffect(() => {
     dispatch(productActions.fetchProductList());
     dispatch(categoryActions.fetchCategoryList());
-  }, []);
+  }, [dispatch]);
   const columns: any = [
     {
       title: 'Tên sản phẩm',
@@ -40,7 +40,8 @@ export const ProductTable = (props: Props) => {
       title: 'Giá bán',
       dataIndex: 'price',
       key: 'price',
-      render: (price : number) => new Intl.NumberFormat('de-DE',{style:'currency',currency:'VND'}).format(price),
+      render: (price: number) =>
+        new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(price),
 
       sorter: {
         compare: (a: Product, b: Product) => a.price - b.price,
@@ -99,6 +100,7 @@ export const ProductTable = (props: Props) => {
       width: '10%',
     },
   ];
+
   return (
     <div className="col-7">
       {isLoading === true ? (

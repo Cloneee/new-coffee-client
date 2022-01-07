@@ -83,6 +83,5 @@ const orderItemsSlice = createSlice({
 });
 export const orderItemsActions = orderItemsSlice.actions;
 export const selectProductList = (state: RootState) => state.orderItems.listItem;
-// export const selectProductLoading = (state: RootState) => state.product.loading;
 const orderItemsReducer = orderItemsSlice.reducer;
 export default orderItemsReducer;

@@ -10,9 +10,9 @@ const orderAPi = {
     const url = '/orders';
     return axiosClient.post(url, data);
   },
-  update(data: Order): Promise<Order> {
-    const url = '/orders';
-    return axiosClient.patch(url, data);
+  toogle(data: any): Promise<any> {
+    const url = '/orders/toggle';
+    return axiosClient.post(url, data);
   },
 
   getById(id: string): Promise<Order> {

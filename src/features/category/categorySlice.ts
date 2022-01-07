@@ -5,8 +5,7 @@ import { Category } from 'models/category';
 export interface categoryState {
   loading: boolean;
   list: Category[];
-  // filter: ListParams;
-  // pagination: PaginationParams;
+ 
 }
 
 const initialState: categoryState = {

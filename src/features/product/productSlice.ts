@@ -5,8 +5,6 @@ import { Product } from 'models/product';
 export interface ProductState {
   loading: boolean;
   list: Product[];
-  // filter: ListParams;
-  // pagination: PaginationParams;
 }
 
 const initialState: ProductState = {
@@ -37,8 +35,6 @@ export const productActions = productSlice.actions;
 // Selectors
 export const selectProductList = (state: RootState) => state.product.list;
 export const selectProductLoading = (state: RootState) => state.product.loading;
-// export const selectProductFilter = (state: RootState) => state.product.filter;
-// export const selectProductPagination = (state: RootState) => state.product.pagination;
 
 // Reducer
 const productReducer = productSlice.reducer;

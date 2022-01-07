@@ -1,4 +1,4 @@
-import { ListResponse } from 'models';
+import { ListResponse, ProductResponse } from 'models';
 import { Product } from 'models';
 import axiosClient from './axios-client';
 
@@ -7,16 +7,16 @@ const productAPi = {
     const url = '/products';
     return axiosClient.get(url);
   },
-  add(data: Product): Promise<Product> {
+  add(data: ProductResponse): Promise<Product> {
     const url = '/products';
     return axiosClient.post(url, data);
   },
-  update(data: Product): Promise<Product> {
-    const url = '/products';
-    return axiosClient.patch(url, data);
+  update(id: string, data: Product): Promise<Product> {
+    const url = '/products/'+id;
+    return axiosClient.put(url, data);
   },
 
-  getById(id: string): Promise<Product> {
+  getById(id: string | undefined): Promise<ProductResponse> {
     const url = `/products/${id}`;
     return axiosClient.get(url);
   },

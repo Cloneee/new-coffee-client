@@ -30,7 +30,6 @@ export const OrderTable = (props: Props) => {
     if (query === '') {
       dispatch(customerActions.fetchCustomerList());
     } else dispatch(customerActions.fetchCustomerResultListWhenSearch(query));
-
   };
 
   useEffect(() => {
@@ -75,7 +74,6 @@ export const OrderTable = (props: Props) => {
         );
         dispatch(orderItemsActions.destroyOrderItems());
         setSelectedCustomer({});
-
       } catch (error) {
         console.log(error);
       }
@@ -247,12 +245,17 @@ export const OrderTable = (props: Props) => {
               footer={footerOfDetailModal}
             >
               <div>
-              <Search
-                placeholder="Nhập thông tin ..."
-                onSearch={(query) => onSearch(query)}
-                style={{ width: 200 }}
-              />
-              <Button type='primary' onClick={()=> dispatch(customerActions.fetchCustomerList())}>Mặc định</Button>
+                <Search
+                  placeholder="Nhập thông tin ..."
+                  onSearch={(query) => onSearch(query)}
+                  style={{ width: 200 }}
+                />
+                <Button
+                  type="primary"
+                  onClick={() => dispatch(customerActions.fetchCustomerList())}
+                >
+                  Mặc định
+                </Button>
                 <Table
                   locale={locale}
                   rowKey={'_id'}
