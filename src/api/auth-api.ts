@@ -27,6 +27,7 @@ const employeeAPi = {
   remove(id: string): Promise<any> {
     const url = `/employees/${id}`;
     return axiosClient.delete(url);
+    
   },
 };
 

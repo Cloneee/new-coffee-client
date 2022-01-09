@@ -19,6 +19,10 @@ const orderAPi = {
     const url = `/orders/${id}`;
     return axiosClient.get(url);
   },
+  getTotalSales(body: any): Promise<any> {
+    const url = `/orders/totalsales`;
+    return axiosClient.post(url, body);
+  },
   getByCustomer(params: ListParams): Promise<ListResponse<OrderResponse>> {
     const url = `/orders/customer/${params.id}?limit=5&page=${params.page}`;
     return axiosClient.get(url);

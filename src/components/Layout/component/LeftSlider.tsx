@@ -2,7 +2,7 @@ import {
   ControlOutlined,
   NotificationOutlined,
   OrderedListOutlined,
-  UserOutlined
+  UserOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useAppSelector } from 'app/hooks';
@@ -25,9 +25,8 @@ const listIconOfSubMenu = [
 const LeftSlider = (props: Props) => {
   const { onSelectedLayoutIndexChange } = props;
   let role: any = useAppSelector((state) => state.auth.currentUSer?.role);
-  if(typeof role === 'undefined') {
-    if(sessionStorage.getItem('role'))
-    role = sessionStorage.getItem('role')
+  if (typeof role === 'undefined') {
+    if (sessionStorage.getItem('role')) role = sessionStorage.getItem('role');
   }
   let subMenu = [
     {
@@ -51,7 +50,7 @@ const LeftSlider = (props: Props) => {
         items: [
           { key: 0, content: 'Tạo hoá đơn mới' },
           { key: 1, content: 'Danh sách hoá đơn' },
-          // { key: 2, content: 'Danh sách hoá đơn' },
+          { key: 2, content: 'Thống kê hoá đơn' },
         ],
       },
       { key: 'products', title: 'Sản phẩm', items: [{ key: 3, content: 'Danh sách sản phẩm' }] },

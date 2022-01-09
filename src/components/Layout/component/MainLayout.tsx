@@ -4,6 +4,7 @@ import { ListEmployeePage } from 'features/employee/pages/ListEmployeePage';
 import { ListOrderPage } from 'features/order/pages/ListOrderPage';
 import { OrderPage } from 'features/order/pages/OrderPage';
 import { ProductPage } from 'features/product/pages/ProductPage';
+import TotalSales from 'features/totalSale/TotalSales';
 import React from 'react';
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 const MainLayout = (props: Props) => {
     const {layoutSelectedIndex} = props
     const { Content } = Layout
-    const layoutList: any[] = [<OrderPage/>,<ListOrderPage/>,<ProductPage/>,<ProductPage/>,<ListCustomerPage/>,<ListEmployeePage/>, ]
+    const layoutList: any[] = [<OrderPage/>,<ListOrderPage/>,<TotalSales/>,<ProductPage/>,<ListCustomerPage/>,<ListEmployeePage/>, ]
     return (
         <Layout style={{ padding: '0px 10px 10px' }}>
             <Content
