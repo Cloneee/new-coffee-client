@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal, Select, Table } from 'antd';
+import { Button, Form, Input, Modal, Select, Table, Tag } from 'antd';
 import confirm from 'antd/lib/modal/confirm';
 import employeeAPi from 'api/auth-api';
 import EmployeeAPi from 'api/employee-api';
@@ -158,6 +158,12 @@ export const ListEmployeePage = () => {
       dataIndex: 'address',
       key: 'address',
       // width: '20%'
+    },
+    {
+      title: 'Chức vụ',
+      dataIndex: 'role',
+      key: 'role',
+      render: (role: String)=> <Tag color={role === "admin"? "red" : role === "manager"? "orange" : "green"}>{role.toUpperCase()}</Tag>
     },
 
     {
