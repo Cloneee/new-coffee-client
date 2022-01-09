@@ -183,6 +183,7 @@ export const ProductPage = () => {
       title: 'Ngày tạo',
       dataIndex: 'dateCreated',
       key: 'dateCreated',
+      render: (dateCreated: Date)=> new Date(dateCreated).toLocaleString()
     },
     {
       title: 'Chi tiết',

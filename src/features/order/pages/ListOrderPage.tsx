@@ -70,6 +70,7 @@ export const ListOrderPage = () => {
       title: 'Ngày tạo',
       dataIndex: 'dateOrdered',
       key: 'dateOrdered',
+      render: (dateCreated: Date)=> new Date(dateCreated).toLocaleString()
     },
     {
       title: 'Chi tiết',
